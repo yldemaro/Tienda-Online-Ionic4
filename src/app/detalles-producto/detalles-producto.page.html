@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="font-size:13px;">Detalles del Producto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+
+
+  <ion-card>
+    <div text-center>
+      <img width="200px" [src]="image" alt="this is the image" />
+    </div>
+    <ion-card-header no-padding>
+      <ion-card-title>{{item.title}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Categoria {{item.categoria}}</p>
+      <p>Detalles: {{item.description}}</p>
+      <p>Precio: {{item.precio}}{{item.divisa}} </p>
+      <ion-button fill="outline" color="primary" (click)="iraprofile(item.uid)">Contactar Vendedor
+      </ion-button>
+    </ion-card-content>
+
+  </ion-card>
+
+
+  <div>
+    <h3>
+      Comentarios
+    </h3>
+    <div margin-top>
+      <ul *ngIf="preg">
+        <div *ngIf="preg.length>0">
+          <li margin-bottom *ngFor="let pregunta of preg" style="list-style-type:none; border-bottom:2px solid #ccc;">
+            <div margin-bottom
+              style="border:1px solid rgb(120, 139, 120); border-radius:0px 10px 10px 10px; padding:2px;">
+              <p> Pregunta: {{pregunta.payload.doc.data().nombre}}</p>
+            </div>
+            <div *ngFor="let resp of resps; let i=index;">
+              <div *ngIf="cargando===false">
+                <div *ngIf="pregunta.payload.doc.id===resp.idPregunta"
+                  style="border:1px solid rgb(78, 85, 95);padding:2px;border-radius:10px 10px 0px 10px;">
+                  <p>Respuesta: {{resp.respuesta}}</p>
+                </div>
+              </div>
+
+            </div>
+            <div margin-top text-center *ngIf="uid === ids">
+              <ion-list>
+                <ion-item>
+                  <ion-input placeholder="Responder" type="text" [(ngModel)]="respuesta"></ion-input>
+                </ion-item>
+                <ion-button color="prinary" fill="outline" expand="block"
+                  (click)="createRespuesta(pregunta.payload.doc.id, respuesta, pregunta.payload.doc.data().uidPreg)">
+                  Responder
+                </ion-button>
+              </ion-list>
+            </div>
+          </li>
+          <div margin-top text-center *ngIf="uid !== ids">
+            <ion-list>
+              <ion-item>
+                <ion-input placeholder="Preguntar" type="text" [(ngModel)]="pregunta"></ion-input>
+              </ion-item>
+            </ion-list>
+            <ion-button color="prinary" fill="outline" expand="block" (click)="preguntar(pregunta)">Preguntar
+            </ion-button>
+          </div>
+        </div>
+        <div *ngIf="preg.length===0">
+          <h3>Vaya no tienes preguntas</h3>
+          <div margin-top text-center *ngIf="uid !== ids">
+            <ion-list>
+              <ion-item>
+                <ion-input placeholder="Preguntar" type="text" [(ngModel)]="pregunta"></ion-input>
+              </ion-item>
+            </ion-list>
+            <ion-button color="prinary" fill="outline" expand="block" (click)="preguntar(pregunta)">Preguntar
+            </ion-button>
+          </div>
+        </div>
+      </ul>
+    </div>
+
+
+
+
+
+  </div>
+
+
+
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+
+  </ion-toolbar>
+</ion-footer>

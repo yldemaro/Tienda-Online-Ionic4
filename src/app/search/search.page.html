@@ -1,0 +1,34 @@
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-searchbar placeholder="Buscar Producto..." animated (ionChange)="buscarProducto( $event )">
+		</ion-searchbar>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+	<div *ngIf="items">
+		<ion-list *ngIf="items.length > 0">
+			<ion-item *ngFor="let prod of items | search:textoBuscar">
+				<ion-thumbnail slot="start">
+					<img [src]="prod.payload.doc.data().image">
+				</ion-thumbnail>
+				<ion-label>{{prod.payload.doc.data().title}}</ion-label>
+				<ion-button color="primary" fill="outline" slot="end"
+					[routerLink]="['/detallesProducto', prod.payload.doc.id]">
+					<ion-icon slot="icon-only" name="eye"></ion-icon>
+				</ion-button>
+			</ion-item>
+		</ion-list>
+	</div>
+
+
+
+</ion-content>
+<ion-footer>
+	<ion-toolbar color="primary">
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref="home"></ion-back-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-footer>

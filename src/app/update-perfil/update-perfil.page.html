@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Actualizar Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div>
+    <ion-row no-padding>
+      <ion-col size="6" offset="3">
+        <img [src]="image" alt="this is the image" />
+      </ion-col>
+    </ion-row>
+    <ion-row no-padding>
+      <ion-col size="6" offset="3">
+        <ion-button fill="outline" expand="block" size="small" (click)="openImagePicker()">Change Picture</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating" color="primary">Nombre</ion-label>
+      <ion-input type="text" [(ngModel)]="nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">Ubicacion</ion-label>
+      <ion-textarea [(ngModel)]="ubicacion"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">Telefono</ion-label>
+      <ion-input type="tel" [(ngModel)]="telefono"></ion-input>
+    </ion-item>
+
+    <ion-button class="submit-btn" expand="block" type="submit" (click)="onSubmit()">Update</ion-button>
+  </ion-list>
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar color="primary"></ion-toolbar>
+</ion-footer>

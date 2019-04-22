@@ -1,0 +1,237 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/crearProducto']">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/search']">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title style="font-size:13px;">SuperTodoGuayana</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="list-mini-content">
+
+  <div *ngIf="viveres">
+    <div *ngIf="viveres.length == 0" class="empty-list">
+      <h3>No se encuentran Viveres</h3>
+    </div>
+
+    <div *ngIf="viveres.length > 0" class="list-mini">
+      <h3 padding (click)="viveres.expanded = !viveres.expanded">Viveres ({{viveres.length}})</h3>
+      <ion-slides pager="true" [options]="slideOpts">
+
+        <ion-slide style="border-bottom: 2px solid #ccc" *ngFor="let item of viveres">
+          <ion-grid margin-bottom *ngIf="viveres.expanded">
+            <ion-row>
+              <ion-col size="2" class="centrar">
+                <img [src]="item.payload.doc.data().image" style="border-radius:50%; width:40px; height:40px;">
+              </ion-col>
+              <ion-col size="6" class="centrar">
+                <ion-label>{{item.payload.doc.data().title}}</ion-label>
+              </ion-col>
+              <ion-col size="4" class="centrar">
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-icon style="width: 32px; height: 32px;" color="primary"
+                    *ngIf="uid===item.payload.doc.data().uid" name="create"
+                    [routerLink]="['/details', item.payload.doc.id]"></ion-icon>
+                  </ion-col>
+                  <ion-col size="6">
+                    <ion-icon style="width: 32px; height: 32px;"
+                    [routerLink]="['/detallesProducto', item.payload.doc.id]" color="primary" name="eye">
+                  </ion-icon>
+                </ion-col>
+              </ion-row>
+
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</div>
+
+<div *ngIf="items">
+
+  <div *ngIf="items.length == 0" class="empty-list">
+    No se encuentran Inmuebles
+  </div>
+  <div *ngIf="items.length > 0" class="list-mini">
+    <h3 padding (click)="items.expanded = !items.expanded">Inmuebles ({{items.length}})</h3>
+    <ion-slides pager="true" [options]="slideOpts">
+      <ion-slide style="border-bottom: 2px solid #ccc" *ngFor="let item of items">
+        <ion-grid margin-bottom *ngIf="items.expanded">
+          <ion-row>
+            <ion-col size="2" class="centrar">
+              <img [src]="item.payload.doc.data().image" style="border-radius:50%; width:40px; height:40px;">
+            </ion-col>
+            <ion-col size="6" class="centrar">
+              <ion-label>{{item.payload.doc.data().title}}</ion-label>
+            </ion-col>
+            <ion-col size="4" class="centrar">
+              <ion-row>
+                <ion-col size="6">
+                  <ion-icon style="width: 32px; height: 32px;" color="primary"
+                  *ngIf="uid===item.payload.doc.data().uid" name="create"
+                  [routerLink]="['/details', item.payload.doc.id]"></ion-icon>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-icon style="width: 32px; height: 32px;"
+                  [routerLink]="['/detallesProducto', item.payload.doc.id]" color="primary" name="eye">
+                </ion-icon>
+              </ion-col>
+            </ion-row>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+</div>
+</div>
+
+<div *ngIf="veh">
+  <div *ngIf="veh.length == 0" class="empty-list">
+    <h3>No se encuentran Automoviles</h3>
+  </div>
+
+  <div *ngIf="veh.length > 0" class="list-mini">
+    <h3 padding (click)="veh.expanded = !veh.expanded">Automoviles ({{veh.length }})</h3>
+    <ion-slides pager="true" [options]="slideOpts">
+
+      <ion-slide style="border-bottom: 2px solid #ccc" *ngFor="let item of veh">
+        <ion-grid margin-bottom *ngIf="veh.expanded">
+          <ion-row>
+            <ion-col size="2" class="centrar">
+              <img [src]="item.payload.doc.data().image" style="border-radius:50%; width:40px; height:40px;">
+            </ion-col>
+            <ion-col size="6" class="centrar">
+              <ion-label>{{item.payload.doc.data().title}}</ion-label>
+            </ion-col>
+            <ion-col size="4" class="centrar">
+              <ion-row>
+                <ion-col size="6">
+                  <ion-icon style="width: 32px; height: 32px;" color="primary"
+                  *ngIf="uid===item.payload.doc.data().uid" name="create"
+                  [routerLink]="['/details', item.payload.doc.id]"></ion-icon>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-icon style="width: 32px; height: 32px;"
+                  [routerLink]="['/detallesProducto', item.payload.doc.id]" color="primary" name="eye">
+                </ion-icon>
+              </ion-col>
+            </ion-row>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+</div>
+</div>
+
+<div *ngIf="telf">
+  <div *ngIf="telf.length == 0" class="empty-list">
+    <h3>No se encuentran Telefonos</h3>
+  </div>
+
+  <div *ngIf="telf.length > 0" class="list-mini">
+    <h3 padding (click)="telf.expanded = !telf.expanded">Telefonos ({{telf.length}})</h3>
+    <ion-slides pager="true" [options]="slideOpts">
+
+      <ion-slide style="border-bottom: 2px solid #ccc" *ngFor="let item of telf">
+        <ion-grid margin-bottom *ngIf="telf.expanded">
+          <ion-row>
+            <ion-col size="2" class="centrar">
+              <img [src]="item.payload.doc.data().image" style="border-radius:50%; width:40px; height:40px;">
+            </ion-col>
+            <ion-col size="6" class="centrar">
+              <ion-label>{{item.payload.doc.data().title}}</ion-label>
+            </ion-col>
+            <ion-col size="4" class="centrar">
+              <ion-row>
+                <ion-col size="6">
+                  <ion-icon style="width: 32px; height: 32px;" color="primary"
+                  *ngIf="uid===item.payload.doc.data().uid" name="create"
+                  [routerLink]="['/details', item.payload.doc.id]"></ion-icon>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-icon style="width: 32px; height: 32px;"
+                  [routerLink]="['/detallesProducto', item.payload.doc.id]" color="primary" name="eye">
+                </ion-icon>
+              </ion-col>
+            </ion-row>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+</div>
+</div>
+
+<div *ngIf="electr">
+  <div *ngIf="electr.length == 0" class="empty-list">
+    <h3>No se encuentran Electrodomesticos</h3>
+  </div>
+
+  <div *ngIf="electr.length > 0" class="list-mini">
+    <h3 padding (click)="electr.expanded = !electr.expanded">Electrodomesticos ({{electr.length}})</h3>
+    <ion-slides pager="true" [options]="slideOpts">
+
+      <ion-slide style="border-bottom: 2px solid #ccc" *ngFor="let item of electr">
+        <ion-grid margin-bottom *ngIf="electr.expanded">
+          <ion-row>
+            <ion-col size="2" class="centrar">
+              <img [src]="item.payload.doc.data().image" style="border-radius:50%; width:40px; height:40px;">
+            </ion-col>
+            <ion-col size="6" class="centrar">
+              <ion-label>{{item.payload.doc.data().title}}</ion-label>
+            </ion-col>
+            <ion-col size="4" class="centrar">
+              <ion-row>
+                <ion-col size="6">
+                  <ion-icon style="width: 32px; height: 32px;" color="primary"
+                  *ngIf="uid===item.payload.doc.data().uid" name="create"
+                  [routerLink]="['/details', item.payload.doc.id]"></ion-icon>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-icon style="width: 32px; height: 32px;"
+                  [routerLink]="['/detallesProducto', item.payload.doc.id]" color="primary" name="eye">
+                </ion-icon>
+              </ion-col>
+            </ion-row>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+</div>
+</div>
+
+
+
+
+
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/profile',uid]">
+        <ion-icon slot="icon-only" name="person"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
